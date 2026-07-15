@@ -29,11 +29,19 @@ def load_and_clean_data(csv_path):
     """Loads CSV and handles missing values and formatting."""
     print("Loading data...")
     # The dataset uses ';' as separator and ',' as decimal point
-    df = pd.read_csv(csv_path, sep=';', decimal=',', parse_dates=[['Date', 'Time']])
+    df = pd.read_csv(csv_path, sep=';', decimal=',')
     
     # Drop rows/cols that are entirely NaN (artifact of the CSV format)
     df.dropna(how='all', inplace=True)
     df.dropna(axis=1, how='all', inplace=True)
+    
+    # Drop rows where Date is NaN (tail of the CSV has empty rows)
+    df.dropna(subset=['Date'], inplace=True)
+    
+    # Combine Date and Time and convert to datetime index
+    df['Date_Time'] = pd.to_datetime(df['Date'] + ' ' + df['Time'], format='%d/%m/%Y %H.%M.%S', errors='coerce')
+    df.set_index('Date_Time', inplace=True)
+    df.drop(['Date', 'Time'], axis=1, inplace=True)
     
     # Missing values are marked as -200
     df.replace(-200, np.nan, inplace=True)
@@ -41,10 +49,6 @@ def load_and_clean_data(csv_path):
     # Forward fill and backward fill for missing values
     df.ffill(inplace=True)
     df.bfill(inplace=True)
-    
-    # Convert Date_Time to datetime index
-    df['Date_Time'] = pd.to_datetime(df['Date_Time'], format='%d/%m/%Y %H.%M.%S')
-    df.set_index('Date_Time', inplace=True)
     
     return df
 
