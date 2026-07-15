@@ -57,12 +57,3 @@ The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Re
 - **Module 2 (Advanced Architectures):** An **Autoencoder** is employed for initial feature extraction and noise reduction from the raw sensor readings. An **Attention Mechanism** is integrated to allow the model to dynamically weigh the importance of different past time steps when forecasting the future AQI.
 - **Module 3 (Real-World Impact):** The model is applied to a real-world environmental dataset, demonstrating the practical application of deep learning in predicting and managing urban air pollution for public health.
 
-## References
-1. *To be updated after Literature Survey*
-2. *To be updated after Literature Survey*
-3. *To be updated after Literature Survey*
-4. *To be updated after Literature Survey*
-5. *To be updated after Literature Survey*
-
-## Demo
-*Demo screenshots or GIF will be added here*
