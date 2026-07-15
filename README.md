@@ -40,6 +40,11 @@ The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Re
    - Run `notebooks/Evaluation.ipynb` to see the plots of the training/validation loss and evaluate the model using time-series metrics.
    - Alternatively, run `python src/predict.py` for inference.
 
+6. **Web Application (Streamlit):**
+   - We have built an interactive web application for real-time predictions.
+   - Run `streamlit run app.py` to start the web app.
+   - You can randomly select 24-hour sequences from the test set and visually compare the predicted next hour AQI vs the true value.
+
 ## Results
 | Metric | Value |
 | --- | --- |
