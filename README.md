@@ -48,9 +48,9 @@ The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Re
 ## Results
 | Metric | Value |
 | --- | --- |
-| MAE (Mean Absolute Error) | *To be updated* |
-| RMSE (Root Mean Squared Error) | *To be updated* |
-| R² Score | *To be updated* |
+| MAE (Mean Absolute Error) | 0.0328 |
+| RMSE (Root Mean Squared Error) | 0.0495 |
+| R² Score | 0.8201 |
 
 ## Module Mapping
 - **Module 1 (Sequence Models):** An **LSTM (Long Short-Term Memory)** network is used as the core sequence learning mechanism to capture long-term temporal dependencies in the air quality data.

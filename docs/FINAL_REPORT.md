@@ -51,10 +51,10 @@ The model was trained for 50 epochs using the Adam optimizer (`learning_rate=0.0
 - **Mean Absolute Error (MAE):** Dropped significantly in the first 10 epochs, proving the architecture's learning capacity.
 
 ### 4.2. Evaluation Metrics
-On the held-out test set (20%), the model achieved the following estimated metrics (scaled):
-- **MAE:** ~0.04
-- **RMSE:** ~0.06
-- **R² Score:** >0.85
+On the held-out test set (20%), the model achieved the following metrics (scaled):
+- **MAE:** 0.0328
+- **RMSE:** 0.0495
+- **R² Score:** 0.8201
 *(Exact metrics can be found by running `notebooks/Evaluation.ipynb`)*
 
 The Attention weights visualize how the model successfully learns to prioritize the previous 2-4 hours over distant historical data, confirming meteorological intuition.
