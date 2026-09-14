@@ -1,4 +1,4 @@
-# Air Quality Index Prediction Using Time Series LSTM with Attention Mechanism and Autoencoder
+# Short-Term Carbon Monoxide Concentration Forecasting Using an Encoder-LSTM-Attention Framework
 
 **Student Name:** Ramachandra J  
 **Roll Number:** 727824tuam036  
@@ -7,7 +7,7 @@
 Rising air pollution levels in urban areas require accurate forecasting to enable timely public health advisories, but traditional statistical models struggle with complex temporal pollution patterns. This project develops an LSTM-based time series model with an attention mechanism and autoencoder to predict the Air Quality Index accurately.
 
 ## Architecture Diagram
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](docs/architecture_flowchart.png)
 
 ## Dataset Source
 The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Repository. It contains responses from a gas multisensor device deployed in an Italian city, recording hourly instances.
@@ -18,7 +18,7 @@ The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Re
 1. **Clone the repository:**
    ```bash
    git clone <YOUR_GITHUB_REPO_URL>
-   cd DL_AQI_Prediction_727824tuam036
+   cd Short-Term-CO-Forecast
    ```
 
 2. **Install dependencies:**

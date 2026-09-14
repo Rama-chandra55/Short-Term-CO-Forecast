@@ -1,0 +1,32 @@
+# Proposed Hybrid Architecture Workflow: Autoencoder-LSTM with Attention Mechanism
+
+The architecture of the proposed Air Quality Index (AQI) prediction model is a hybrid deep learning network designed to process multivariate time series data. It sequentially integrates an Autoencoder (Encoder phase) for feature extraction, Long Short-Term Memory (LSTM) networks for capturing temporal dependencies, and a Custom Attention Mechanism to dynamically weight significant historical time steps. The workflow is structured into five primary stages:
+
+## 1. Input Layer
+- **Input Data**: The model ingests multivariate time-series data. 
+- **Shape**: `(sequence_length, number_of_features)` (e.g., a 24-hour lookback window across 15 environmental features).
+
+## 2. Autoencoder (Encoder Phase) - Feature Extraction & Noise Filtering
+To handle the inherent noise in sensor data and reduce dimensionality, the input sequence first passes through the encoder component of an Autoencoder framework.
+- **Dense Layer 1**: 64 units with ReLU (Rectified Linear Unit) activation.
+- **Dense Layer 2**: 32 units with ReLU activation.
+- **Function**: Extracts robust, lower-dimensional spatial features at each time step independently, mitigating noise before sequential processing.
+
+## 3. LSTM Layers - Sequential Learning
+The encoded features are subsequently fed into stacked LSTM layers to learn the long-term temporal dependencies and seasonal trends inherent in air pollution data.
+- **LSTM Layer 1**: 64 memory units configured to return the full sequence (`return_sequences=True`).
+- **Regularization**: Dropout layer (rate = 0.2) to prevent overfitting.
+- **LSTM Layer 2**: 32 memory units, also returning the full sequence to maintain the temporal dimension required for the subsequent attention mechanism.
+
+## 4. Attention Mechanism - Temporal Weighting
+A custom Attention Layer is applied across the temporal dimension of the LSTM outputs. 
+- **Alignment Scores**: Computes the relevance of each past time step using learned weights and biases via a `tanh` activation function.
+- **Attention Weights**: Applies a `softmax` function to normalize alignment scores, yielding a probability distribution over the time steps.
+- **Context Vector**: Multiplies the LSTM outputs by the attention weights and reduces the sequence to a fixed-length context vector. 
+- **Function**: Allows the network to dynamically focus on the most critical historical hours (e.g., peak traffic hours) when predicting future AQI, rather than treating all past time steps equally.
+
+## 5. Output Layer - Regression
+The context vector from the attention mechanism is passed through dense layers to predict the continuous AQI value (specifically CO(GT)).
+- **Dense Layer**: 32 units with ReLU activation.
+- **Regularization**: Dropout layer (rate = 0.2).
+- **Final Output Layer**: 1 unit with a linear activation function yielding the final predicted continuous AQI value for the target forecast horizon.
