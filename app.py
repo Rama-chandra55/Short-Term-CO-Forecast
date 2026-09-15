@@ -19,7 +19,8 @@ st.markdown("### Predicting Carbon Monoxide (CO(GT)) levels using Autoencoder + 
 
 @st.cache_resource
 def load_trained_model():
-    model_path = "models/best_model.h5"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(base_dir, "models", "best_model.keras")
     if os.path.exists(model_path):
         return tf.keras.models.load_model(model_path, custom_objects={'AttentionLayer': AttentionLayer})
     return None
