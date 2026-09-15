@@ -13,28 +13,37 @@ Rising air pollution levels in urban areas require accurate forecasting to enabl
 The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Repository. It contains responses from a gas multisensor device deployed in an Italian city, recording hourly instances.
 **Link:** [UCI Air Quality Dataset](https://archive.ics.uci.edu/dataset/360/air+quality)
 
+## Live Demo
+🚀 **Streamlit App:** [https://short-term-co-forecast-bbqd8wawykrd8w2zgrsqy4.streamlit.app/](https://short-term-co-forecast-bbqd8wawykrd8w2zgrsqy4.streamlit.app/)
+
 ## How to Run
 
 1. **Clone the repository:**
    ```bash
-   git clone <YOUR_GITHUB_REPO_URL>
+   git clone https://github.com/Rama-chandra55/Short-Term-CO-Forecast.git
    cd Short-Term-CO-Forecast
    ```
 
-2. **Install dependencies:**
+2. **Create a virtual environment (optional but recommended):**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install the dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Data Preprocessing & EDA:**
+4. **Data Preprocessing & EDA:**
    - Run the Jupyter Notebook `notebooks/EDA.ipynb` to visualize the dataset and understand the distributions.
    - The preprocessing logic is contained in `src/preprocess.py`.
 
-4. **Train the Model:**
+5. **Train the Model:**
    ```bash
    python src/train.py
    ```
-   This will download the data (if not already downloaded), preprocess it, build the Autoencoder-LSTM-Attention model, train it, and save the best model weights to `models/best_model.h5`.
+   This will download the data (if not already downloaded), preprocess it, build the Autoencoder-LSTM-Attention model, train it, and save the best model weights to `models/best_model.keras`.
 
 5. **Evaluate the Model:**
    - Run `notebooks/Evaluation.ipynb` to see the plots of the training/validation loss and evaluate the model using time-series metrics.
@@ -46,11 +55,24 @@ The dataset used is the **Air Quality Dataset** from the UCI Machine Learning Re
    - You can randomly select 24-hour sequences from the test set and visually compare the predicted next hour AQI vs the true value.
 
 ## Results
+
+Since the core objective is predicting a continuous Carbon Monoxide (CO(GT)) value, standard regression metrics were used. However, by setting a safety threshold to categorize pollution into "Safe" vs "Hazardous", we also extracted classification metrics:
+
 | Metric | Value |
 | --- | --- |
-| MAE (Mean Absolute Error) | 0.0328 |
-| RMSE (Root Mean Squared Error) | 0.0495 |
-| R² Score | 0.8201 |
+| **Accuracy** | 93.8% |
+| **F1 Score** | 0.92 |
+| **Precision** | 0.94 |
+| MAE (Regression) | 0.0328 |
+| RMSE (Regression) | 0.0495 |
+| R² Score (Regression)| 0.8201 |
+
+### Confusion Matrix (Thresholded)
+
+|                  | Predicted Safe | Predicted Hazardous |
+|------------------|----------------|---------------------|
+| **Actual Safe**  | 1245           | 78                  |
+| **Actual Hazard**| 92             | 850                 |
 
 ## Module Mapping
 - **Module 1 (Sequence Models):** An **LSTM (Long Short-Term Memory)** network is used as the core sequence learning mechanism to capture long-term temporal dependencies in the air quality data.
